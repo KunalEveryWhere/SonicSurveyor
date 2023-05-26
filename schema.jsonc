@@ -31,5 +31,5 @@
     //This is the endpoint to "cleanDatabase". This allows the client to drop all tables and clean the database.
     "cleanDatabase": {  //Method: DELETE
         "return"        :"string literal"                      // Returns - status string literal
-    }
+    },
 }
