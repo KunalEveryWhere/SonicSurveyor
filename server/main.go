@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 
-	"sonicsurveyor.com/main/createServer"
+	//User-defined packages
+	// "sonicsurveyor.com/main/createServer"
+	"sonicsurveyor.com/main/startUtil"
 )
 
 func init() {
@@ -12,7 +14,9 @@ func init() {
 
 func main() {
 	displayEntryMessage();
-	createServer.MainHandler();
+	// createServer.MainHandler();
+
+	startUtil.StartUtil();
 }
 
 func displayEntryMessage(){

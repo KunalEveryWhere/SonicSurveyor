@@ -1,7 +1,7 @@
-~{
+{
     //This is the endpoint to 'uploadFiles' Route. This allows the client to upload data / files for processing.
     "uploadFiles": {    //Method: POST
-        "OSMData"       :"file - .osm / .osm.pbf / .osm.gz",         //This is the file uploaded from the client, of the surrounding OSM Data
+        "OSMData"       :"file - .osm / .osm.pbf / .osm.gz",     //This is the file uploaded from the client, of the surrounding OSM Data
         "pointSource"   :"file - .geojson",                      //This is the PointSource information also from the client.
         "EPSG"          :"integer string",                       // Coordinate System (EPSG code)
         "temperature"   :"floating string",                      // Temperature at the time of recording
@@ -10,8 +10,13 @@
         "return"        :"string literal"                        // Returns - status string literal
     },
 
+    //This is the endpoint for "importFile" route. This allows the client to import files onto the database.
+    "importFile" :{     //Method: POST
+        "file"          :"file - .shp, .geojson, .csv, others"  //This is the file uploaded from the client for any additional information.
+    },
+
     //This is the endpoint for "listTables" route. This allows the client to list all the tables and its columns currently in the database.
-    "listTable": {      //Method: GET
+    "listTables": {      //Method: GET
         "return"        : "string list"                         //Returns - an list of all tables at the database.
     }, 
 
@@ -19,9 +24,10 @@
     "exportTable": {    //Method: GET
         "tableName"     : "string literal",                     //This contains the name of the table that the client want to export
 
-        "return"        : "file - .geojson  / .shp / others"          //Returns - the requested table (if exists) or blank
+        "return"        : "file - .geojson  / .shp / others"    //Returns - the requested table (if exists) or blank
     },
 
+    //This is the endpoint to "dropTable" route. This allows the client to delete any given table from the database.
     "dropTable": {      //Method: DELETE
         "tableName"     : "string literal",                     //This contains the name of the table that the client wants to drop.
 
