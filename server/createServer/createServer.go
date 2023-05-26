@@ -5,25 +5,13 @@ import (
 	"net/http"
 	"net"
 
-	//User-Defined Packages
+	//User-defined Packages
 	"sonicsurveyor.com/main/settings"
 	"sonicsurveyor.com/main/checkError"
 	"sonicsurveyor.com/main/routes"
 )
 
 var PORT string = settings.PORT;
-
-func hello(w http.ResponseWriter, req *http.Request) {
-    fmt.Fprintf(w, "hello\n")
-}
-
-func headers(w http.ResponseWriter, req *http.Request) {
-    for name, headers := range req.Header {
-        for _, h := range headers {
-            fmt.Fprintf(w, "%v: %v\n", name, h)
-        }
-    }
-}
 
 func getIPv4Address() (string, error) {
 	// Retrieve the list of network interfaces
@@ -58,8 +46,14 @@ func getIPv4Address() (string, error) {
 func MainHandler() {
 	// Register the handler function with the default ServeMux (HTTP request multiplexer)
     http.HandleFunc("/", routes.Description)
-	http.HandleFunc("/description", routes.Description)
-    http.HandleFunc("/echoHeaders", routes.EchoHeaders)
+	http.HandleFunc("/cleanDatabase", routes.CleanDatabase)
+    http.HandleFunc("/description", routes.Description)
+	http.HandleFunc("/dropTable", routes.DropTable)
+	http.HandleFunc("/echoHeaders", routes.EchoHeaders)
+	http.HandleFunc("/exportTable", routes.ExportTable)
+	http.HandleFunc("/importFile", routes.ImportFile)
+	http.HandleFunc("/listTables", routes.ListTables)
+	http.HandleFunc("/uploadFiles", routes.UploadFiles)
 
 	ip, err := getIPv4Address();
 	checkError.InternalIssues("Error whilst retrieving IPv4 Address", err)
