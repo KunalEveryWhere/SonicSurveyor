@@ -12,7 +12,9 @@
 
     //This is the endpoint for "importFile" route. This allows the client to import files onto the database.
     "importFile" :{     //Method: POST
-        "file"          :"file - .shp, .geojson, .csv, others"  //This is the file uploaded from the client for any additional information.
+        "file"          :"file - .shp, .geojson, .csv, others",  //This is the file uploaded from the client for any additional information.
+
+        "return"        :"string literal"                        // Returns - status string literal
     },
 
     //This is the endpoint for "listTables" route. This allows the client to list all the tables and its columns currently in the database.

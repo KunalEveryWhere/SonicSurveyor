@@ -10,7 +10,7 @@ import (
 func ExternalIssues(message string, w http.ResponseWriter, err error) {
 	if (err != nil) {
 		// ⭐️ TODO: Handle errors according to type
-		http.Error(w, "Internal Server Error: "+message+": ", http.StatusInternalServerError)
+		http.Error(w, "🟥 Internal Server Error: "+message+": ", http.StatusInternalServerError)
 		fmt.Println("Error:", err)
 	}
 }
@@ -18,7 +18,7 @@ func ExternalIssues(message string, w http.ResponseWriter, err error) {
 // All Other Errors. These cause the state of panic.
 func InternalIssues(message string, err error) {
 	if (err != nil) {
-		fmt.Println("Error: ", message, err);
+		fmt.Println("🟥 Error: ", message, err);
 		log.Fatalln("Error: ", err)
 	}
 }
