@@ -23,6 +23,7 @@ func CalculateReceivers(w http.ResponseWriter, buildingTableName string, sourceT
 	checkError.ExternalIssues("Error while Calculating the Receivers Table: \n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nRECEIVERS Table | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "RECEIVERS Table | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }

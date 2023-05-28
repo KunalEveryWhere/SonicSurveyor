@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Point_Source_Hypo",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3826" } },
+"features": [
+{ "type": "Feature", "properties": { "PK": 1, "LWD500": 80.0 }, "geometry": { "type": "Point", "coordinates": [ 303791.043129339115694, 2770711.8920275606215, 0.0 ] } }
+]
+}

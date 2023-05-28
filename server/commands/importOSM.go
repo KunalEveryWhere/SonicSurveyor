@@ -23,6 +23,7 @@ func ImportOSM(w http.ResponseWriter, filepath string, SRID string, ch chan<- st
 	checkError.ExternalIssues("Error while Importing OSM File to Database\n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nImport OSM File | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Import OSM File | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }

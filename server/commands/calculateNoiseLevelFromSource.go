@@ -56,7 +56,8 @@ func CalculateNoiseLevelFromSource(w http.ResponseWriter, buildingTableName stri
 	checkError.ExternalIssues("Error while Calculating the Noise-Level from Source: \n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nNoise Level From Source | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Noise Level From Source | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 	}
 }

@@ -28,6 +28,7 @@ func GenerateNoiseLevelIsoSurface(w http.ResponseWriter, resultsTable string, ch
 	checkError.ExternalIssues("Error while Generating Noise Level Iso-surfaces: \n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nGenerate Noise Level Iso-surfaces | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Generate Noise Level Iso-surfaces | Command output: [ ✅ successful ]\n"
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }

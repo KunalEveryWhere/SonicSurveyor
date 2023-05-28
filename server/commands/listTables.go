@@ -23,6 +23,7 @@ func ListTables(ch chan<- string) {
 	checkError.InternalIssues("Error in listing all the tables in the database\n"+(string(output)), err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nList Table | Command output: [ ✅ successful ] \n", string(output))
-	ch <- string(output);
+	msg := "List Table | Command output: [ ✅ successful ] \n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }
