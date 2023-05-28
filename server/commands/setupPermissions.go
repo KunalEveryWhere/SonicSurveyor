@@ -21,6 +21,7 @@ func SetupPermissions(ch chan<- string){
 	checkError.InternalIssues("Error in setting up permissions\n"+(string(output)), err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nSetup Permissions | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Setup Permissions | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }

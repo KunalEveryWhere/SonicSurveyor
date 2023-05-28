@@ -51,9 +51,11 @@ func MainHandler() {
 	http.HandleFunc("/dropTable", routes.DropTable)
 	http.HandleFunc("/echoHeaders", routes.EchoHeaders)
 	http.HandleFunc("/exportTable", routes.ExportTable)
-	http.HandleFunc("/importFile", routes.ImportFile)
+	http.HandleFunc("/importFile", routes.ImportFile) 
+	http.HandleFunc("/importFileFromJSON", routes.ImportFileFromJSON)
+	http.HandleFunc("/importOSMFile", routes.ImportOSMFile)
 	http.HandleFunc("/listTables", routes.ListTables)
-	http.HandleFunc("/uploadFiles", routes.UploadFiles)
+	http.HandleFunc("/noiseLevelFromSourceStarHandler", routes.NoiseLevelFromSourceStarHandler)
 
 	ip, err := getIPv4Address();
 	checkError.InternalIssues("Error whilst retrieving IPv4 Address", err)

@@ -27,6 +27,7 @@ func ExportTable(w http.ResponseWriter, exportFilePath string, exportFileName st
 	checkError.ExternalIssues("Error Exporting Table\n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nExport Table | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Export Table | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }

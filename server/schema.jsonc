@@ -1,8 +1,8 @@
 {
-    //This is the endpoint to 'uploadFiles' Route. This allows the client to upload data / files for processing.
-    "uploadFiles": {    //Method: POST
-        "OSMData"       :"file - .osm / .osm.pbf / .osm.gz",     //This is the file uploaded from the client, of the surrounding OSM Data
-        "pointSource"   :"file - .geojson",                      //This is the PointSource information also from the client.
+    //This is the endpoint to 'noiseLevelFromSourceStarHandler' Route. This allows the client to upload data / files for processing.
+    "noiseLevelFromSourceStarHandler": {    //Method: POST
+        "OSMDataFile"       :"file - .osm / .osm.pbf / .osm.gz",     //This is the file uploaded from the client, of the surrounding OSM Data
+        "PointSourceDataFile"   :"file - .geojson",                      //This is the PointSource information also from the client.
         "EPSG"          :"integer string",                       // Coordinate System (EPSG code)
         "temperature"   :"floating string",                      // Temperature at the time of recording
         "humidity"      :"floating string",                      // Humidity of the area at the time of recording
@@ -13,6 +13,23 @@
     //This is the endpoint for "importFile" route. This allows the client to import files onto the database.
     "importFile" :{     //Method: POST
         "file"          :"file - .shp, .geojson, .csv, others",  //This is the file uploaded from the client for any additional information.
+
+        "return"        :"string literal"                        // Returns - status string literal
+    },
+
+    //⭐️ This is the endpoint for "importFile" route. This allows the client to import files onto the database.
+    "importFileFromJSON" :{     //Method: POST
+        "fileContents"          :"json string",                          //This is the file uploaded from the client for any additional information.
+        "newFileName"           : "string valid-literal",                //This is the new file-name
+        "generatedTableName"    : "string literal",                      //This is the name of the generated table
+
+        "return"        :"string literal"                        // Returns - status string literal
+    },
+
+    //⭐️ This is the endpoint for "importFile" route. This allows the client to import files onto the database.
+    "importOSMFile" :{     //Method: POST
+        "file"           :"file - .osm / .osm.pbf / .osm.gz",     //This is the file uploaded from the client for any additional information.
+        "EPSG"          :"integer string",                       // Coordinate System (EPSG code)
 
         "return"        :"string literal"                        // Returns - status string literal
     },

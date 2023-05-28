@@ -23,6 +23,7 @@ func DropTable(w http.ResponseWriter, tableName string, ch chan<- string) {
 	checkError.ExternalIssues("Error while Dropping table: "+tableName+" from Database\n"+(string(output)), w, err);
 
 	// Print & send the output to channel
-	fmt.Println("\n\n\nDrop Table | Command output: [ ✅ successful ]\n", string(output))
-	ch <- string(output);
+	msg := "Drop Table | Command output: [ ✅ successful ]\n";
+	fmt.Println("\n\n\n"+msg, string(output))
+	ch <- msg+string(output);
 }
