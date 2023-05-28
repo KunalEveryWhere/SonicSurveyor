@@ -2,35 +2,29 @@ package main
 
 import (
 	"fmt"
-	//s"io/ioutil"
-	"log"
-	"bufio"
-	"os"
-	
-	//User-Defined Packages
+	"os/exec"
+	"syscall"
 )
 
 func main() {
-    filePath := "./README.md"
-	file, err := os.Open(filePath)
+	// Command to run with sudo
+	cmd := exec.Command("sudo", "echo", "Hello, World!")
+
+	// Set the appropriate options to run with elevated privileges
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Credential: &syscall.Credential{
+			Uid: 0, // UID of the superuser (root)
+			Gid: 0, // GID of the superuser (root)
+		},
+	}
+
+	// Run the command and get the output
+	output, err := cmd.Output()
 	if err != nil {
-		log.Fatalf("Error reading file")
+		fmt.Println("Error:", err)
 		return
 	}
-	defer file.Close()
 
-	// Create a scanner to read the file line by line
-	scanner := bufio.NewScanner(file)
-
-
-	// Iterate over each line and write it to the response
-	for scanner.Scan() {
-		line := scanner.Text()
-		fmt.Println(line)
-	}
-
-	if scanner.Err() != nil {
-		log.Fatalln("Failed to read file")
-		return
-	}
+	// Print the output
+	fmt.Println("Command output:", string(output))
 }
