@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import currentUserLocationIcon from "../assets/currentLocationIcon.png";
 import RecordSoundButton from "./RecordSoundButton";
+import GeolocationPermission from './GeolocationPermission';
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -121,29 +122,31 @@ const Map = () => {
 
 
   return (
-    <div style={{ height: '100vh' }}>
-      <ReactMapGL
-        {...viewport}
-        style={{width: '100vw', height: '100vh'}}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        onMove={evt => setViewport(evt.viewport)}
-        mapboxAccessToken={MAPBOX_TOKEN}
-      >
-        {userLocation && (
-           <Marker longitude={userLocation.longitude} latitude={userLocation.latitude} color="red" />
-        )}
-      </ReactMapGL>
-      <div className='informationArea'>
-
-        {averageNoiseDecibel && <p>Average Noise Decibel: <b>{averageNoiseDecibel}</b></p>}
+    <React.Fragment>
+      <div style={{ height: '100vh' }}>
+        <ReactMapGL
+          {...viewport}
+          style={{width: '100vw', height: '100vh'}}
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+          onMove={evt => setViewport(evt.viewport)}
+          mapboxAccessToken={MAPBOX_TOKEN}
+        >
+          {userLocation && (
+            <Marker longitude={userLocation.longitude} latitude={userLocation.latitude} color="red" />
+          )}
+        </ReactMapGL>
+        <div className='informationArea'>
+          <GeolocationPermission />
+          {averageNoiseDecibel && <p>Average Noise Decibel: <b>{averageNoiseDecibel}</b></p>}
+        </div>
+        <div className = "additionalButtons">
+            <button onClick={handleUpdateLocation} className='currentLocationButton'>
+              <img src={currentUserLocationIcon} alt="Current User Location Icon" width="48" height="48"/>
+            </button>
+            <RecordSoundButton onSendAverageNoiseDecibel={handleAverageNoiseDecibel} />
+        </div>
       </div>
-      <div className = "additionalButtons">
-          <button onClick={handleUpdateLocation} className='currentLocationButton'>
-            <img src={currentUserLocationIcon} alt="Current User Location Icon" width="48" height="48"/>
-          </button>
-          <RecordSoundButton onSendAverageNoiseDecibel={handleAverageNoiseDecibel} />
-      </div>
-    </div>
+    </React.Fragment>
   );
 };
 
