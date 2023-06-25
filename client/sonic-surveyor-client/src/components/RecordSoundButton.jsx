@@ -1,91 +1,3 @@
-// import React, { useState, useRef } from 'react';
-// import RecordSoundIcon from "../assets/recordSoundIcon.png"
-
-// //The time to record, in seconds
-// const recordingDuration = 10;
-
-// const RecordSoundButton = () => {
-//   const audioRef = useRef(null);
-//   const [isRecording, setIsRecording] = useState(false);
-//   const [averageNoiseDecibel, setAverageNoiseDecibel] = useState(0);
-//   const [mediaRecorder, setMediaRecorder] = useState(null);
-//   const chunksRef = useRef([]);
-
-//   const handleClick = () => {
-//     console.log(2);
-//   };
-
-//   const handleRecord = async () => {
-//     try {
-//       if (!isRecording) {
-//         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-//         const mediaRecorderInstance = new MediaRecorder(stream);
-//         setMediaRecorder(mediaRecorderInstance);
-//         chunksRef.current = [];
-
-//         mediaRecorderInstance.ondataavailable = (e) => {
-//           if (e.data.size > 0) {
-//             chunksRef.current.push(e.data);
-//           }
-//         };
-
-//         mediaRecorderInstance.onstop = () => {
-//           const audioBlob = new Blob(chunksRef.current, { type: 'audio/wav' });
-//           const audioURL = URL.createObjectURL(audioBlob);
-//           audioRef.current.src = audioURL;
-
-//           const audioContext = new AudioContext();
-//           const reader = new FileReader();
-
-//           reader.onloadend = () => {
-//             audioContext.decodeAudioData(reader.result, (buffer) => {
-//               const channelData = buffer.getChannelData(0); // Assuming mono audio
-//               const squaredValues = channelData.map((sample) => sample * sample);
-//               const meanSquare = squaredValues.reduce((sum, sample) => sum + sample, 0) / squaredValues.length;
-//               const rootMeanSquare = Math.sqrt(meanSquare);
-//               const reference = 0.000001; // Reference amplitude for 0 dB
-//               const decibel = 20 * Math.log10(rootMeanSquare / reference);
-//               setAverageNoiseDecibel(decibel.toFixed(2));
-//             });
-//           };
-
-//           reader.readAsArrayBuffer(audioBlob);
-//         };
-
-//         mediaRecorderInstance.start();
-//         setIsRecording(true);
-//       } else {
-//         mediaRecorder.stop();
-//         setIsRecording(false);
-//       }
-//     } catch (error) {
-//       console.error('Error accessing microphone:', error);
-//     }
-//   };
-
-//   const amplitudeToDecibel = (amplitude) => 20 * Math.log10(amplitude);
-
-//   return (
-//     // <React.Fragment>
-//     //   <button onClick={handleRecord} className='recordSoundButton'>
-//     //     {
-//     //     isRecording ? <img src={RecordSoundIcon} alt="Record Sound Icon" width="48" height="auto"/> :
-//     //     <img src={RecordSoundIcon} alt="Record Sound Icon" width="60" height="auto"/>
-//     //   }
-//     //   </button>
-//     //   {/* <audio ref={audioRef} controls /> */}
-//     //   {averageNoiseDecibel !== 0 && <p>Average Noise Decibel: {averageNoiseDecibel}</p>}
-//     // </React.Fragment>
-//     <div>
-//       <button onClick={handleRecord}>{isRecording ? 'Stop' : 'Record'}</button>
-//       <audio ref={audioRef} controls />
-//       {averageNoiseDecibel !== 0 && <p>Average Noise Decibel: {averageNoiseDecibel}</p>}
-//     </div>
-//   );
-// };
-
-// export default RecordSoundButton;
-
 import React, { useState, useRef } from 'react';
 import RecordSoundStartIcon from "../assets/recordSoundStartIcon.png"
 import RecordSoundStopIcon from "../assets/recordSoundStopIcon.png"
@@ -144,6 +56,7 @@ const RecordSoundButton = ({onSendAverageNoiseDecibel}) => {
       }
     } catch (error) {
       console.error('Error accessing microphone:', error);
+      console.log(averageNoiseDecibel);
     }
   };
 
